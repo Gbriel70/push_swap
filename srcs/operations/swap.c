@@ -6,6 +6,19 @@ void swap_stack_a(t_stack *a)
     ft_printf("sa\n");
 }
 
+void swap_stack_b(t_stack *b)
+{
+    ft_swap_top(b);
+    ft_printf("sb\n");
+}
+
+void swap_both_stacks(t_stack *a, t_stack *b)
+{
+    ft_swap_top(a);
+    ft_swap_top(b);
+    ft_printf("ss\n");
+}
+
 void swap_top(t_stack *stack)
 {
     int i;
