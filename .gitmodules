@@ -1,0 +1,3 @@
+[submodule "libft_plus"]
+	path = libft_plus
+	url = https://github.com/Gbriel70/libft_plus.git
