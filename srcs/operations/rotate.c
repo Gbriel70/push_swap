@@ -22,16 +22,13 @@ void rotate_both(t_stack *a, t_stack *b)
 void rotate_stack(t_stack *stack)
 {
     int i;
-    int top;
 
     if (stack->top <= 1)
         return ;
-    top = stack->items[stack->top - 1];
     i = stack->top - 1;
     while(i > 0)
     {
-        stack->items[i] = stack->items[i - 1];
+        ft_swap(&stack->items[i], &stack->items[i - 1]);
         i--;
     }
-    stack->items[0] = top;
 }
