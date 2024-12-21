@@ -6,6 +6,7 @@
 # include "../libft_plus/includes/not_in_standard_includes/not_in_standard.h"
 # include "../libft_plus/includes/not_in_standard_includes/ft_printf_bonus.h"
 # include "../libft_plus/includes/ft_string_functions.h"
+# include "../libft_plus/includes/ft_stdlib.h"
 
 typedef struct s_stack
 {
@@ -42,5 +43,10 @@ void reverse_both_stacks(t_stack *a, t_stack *b);
 //FUNCTIONS TO CHECK ERRORS
 void ft_free_matrix(char **array, int size);
 void ft_handle_errors(t_stack *a, t_stack *b, int stage, char **n_matrix);
+
+//FUCNTIONS UTILS
+void init_stacks(t_stack *a, t_stack *b, char **init_matrix);
+int mega_atoi(const char *m_index, t_stack *a, t_stack *b, char **init_matrix);
+void check_duplicates(t_stack *a, t_stack *b);
 
 #endif
