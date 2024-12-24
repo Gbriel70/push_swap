@@ -119,5 +119,9 @@ int main(int ac, char **av)
         ft_handle_errors(&a, &b, 0, NULL);
     init_stacks(&a, &b, init_matrix);
     check_duplicates(&a, &b);
+    if (check_if_sorted(&a) == 1)
+        ft_turk_sort(&a, &b);
+    free(a.items);
+    free(b.items);
     return (0);
 }

@@ -33,3 +33,18 @@ void ft_handle_errors(t_stack *a, t_stack *b, int stage, char **n_matrix)
     write(2, "Error\n", 6);
     exit(EXIT_FAILURE);
 }
+
+int check_if_sorted(t_stack *a)
+{
+    int i;
+
+    i = 0;
+    while (i < a->top - 1)
+    {
+        if (a->items[i] > a->items[i + 1])
+            i++;
+        else
+            return (1);
+    }
+    return (0);
+}
