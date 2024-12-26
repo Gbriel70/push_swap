@@ -10,13 +10,21 @@ MAKE_NO_PRINT = $(MAKE) --no-print-directory
 LIB_PATH = ./libft_plus/
 HEADER_PATH = ./includes
 SRC_PATH = ./srcs
+BONUS_PATH = ./srcs_bonus
 
 #================================FILES=========================================#
 
+#MANDATORY
 NAME = push_swap
+BONUS_NAME = checker
 SRC = $(wildcard $(SRC_PATH)/*.c) $(wildcard $(SRC_PATH)/operations/*.c)
 OBJ = $(SRC:.c=.o)
 HEADER = $(HEADER_PATH)/push_swap.h
+
+#BONUS
+SRC_BONUS = $(wildcard $(BONUS_PATH)/*.c) $(wildcard $(BONUS_PATH)/operations/*.c)
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
+HEADER_BONUS = $(HEADER_PATH)/push_swap_bonus.h
 
 #================================RULES=========================================#
 
@@ -29,6 +37,14 @@ $(NAME): $(OBJ) $(HEADER)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT_FLAG)
 
 $(SRC_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+bonus: libft $(BONUS_NAME)
+
+$(BONUS_NAME): $(OBJ_BONUS) $(HEADER_BONUS)
+	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(OBJ_BONUS) $(LIBFT_FLAG)
+
+$(BONUS_PATH)/%.o: $(BONUS_PATH)/%.c $(HEADER_BONUS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 run:
@@ -55,11 +71,15 @@ gdb:
 #================================CLEAN=========================================#
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(OBJ_BONUS)
 	$(MAKE_NO_PRINT) clean -C $(LIB_PATH)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_NAME)
 	$(MAKE_NO_PRINT) fclean -C $(LIB_PATH)
 
-.PHONY: all libft run leak gdb clean fclean
+re: fclean all
+
+rebonus: fclean bonus
+
+.PHONY: all libft run leak tests gdb clean fclean re rebonus

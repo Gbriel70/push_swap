@@ -61,3 +61,4 @@ fi
 
 #Calculate the average number of operations
 average_operations=$(($total_operations / tests))
+echo "Avg moves:$average_operations"
