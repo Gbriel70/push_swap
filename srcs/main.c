@@ -55,31 +55,29 @@ void init_stacks(t_stack *a, t_stack *b, char **init_matrix)
 
 int mega_atoi(const char *m_index, t_stack *a, t_stack *b, char **init_matrix)
 {
-    unsigned char i;
-    int sign;
-    int nbr;
-
-    i = 0;
+    unsigned char i = 0;
+    int sign = 1;
+    long nbr = 0;
     while (m_index[i] == ' ' || m_index[i] == '\t' || m_index[i] == '\n'
             || m_index[i] == '\v' || m_index[i] == '\f' || m_index[i] == '\r')
         i++;
-    sign = 1;
     if (m_index[i] == '-')
         sign = -1;
     if (m_index[i] == '-' || m_index[i] == '+')
         i++;
     if (m_index[i] == '\0')
         ft_handle_errors(a, b, 2, init_matrix);
-    nbr = 0;
     while (m_index[i] >= '0' && m_index[i] <= '9')
+    {
         nbr = nbr * 10 + (m_index[i++] - '0');
+        if (nbr * sign > INT_MAX || nbr * sign < INT_MIN)
+            ft_handle_errors(a, b, 3, init_matrix);
+    }
     if (m_index[i] != '\0' && (m_index[i] < '0' || m_index[i] > '9'))
         ft_handle_errors(a, b, 2, init_matrix);
-    nbr *= sign;
-    if (nbr < INT_MIN || nbr > INT_MAX)
-        ft_handle_errors(a, b, 3, init_matrix);
-    return (nbr);
+    return ((int)(nbr * sign));
 }
+
 
 void check_duplicates(t_stack *a, t_stack *b)
 {
