@@ -41,7 +41,12 @@ leak:
 	@echo "ARG: Stack of numbers"
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes ./$(NAME) $(ARG)
 
-#================================LEAKS=========================================#
+#================================TESTER========================================#
+
+tests:
+	@./try_do_my_tests/test.sh $(tests) $(nbrs)
+
+#================================GDB===========================================#
 
 gdb:
 	@echo "ARG: Stack of numbers"
