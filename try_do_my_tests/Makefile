@@ -1,7 +1,7 @@
 NAME = tester
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
-SRC = tester_push_swap.c ../srcs/operations/rotate.c
+SRC = tester_push_swap.c ../srcs/operations/rotate.c ../srcs/operations/swap.c ../srcs/operations/push.c ../srcs/operations/reverse.c
 LIBFT = -L../libft_plus -lft
 
 all: push_swap $(NAME)

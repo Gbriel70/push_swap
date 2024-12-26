@@ -3,6 +3,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
 LIBFT_FLAG = -L$(LIB_PATH) -lft
+MAKE_NO_PRINT = $(MAKE) --no-print-directory
 
 #================================PATHS=========================================#
 
@@ -22,7 +23,7 @@ HEADER = $(HEADER_PATH)/push_swap.h
 all: libft $(NAME)
 
 libft:
-	$(MAKE) -C $(LIB_PATH)
+	$(MAKE_NO_PRINT) -C $(LIB_PATH)
 
 $(NAME): $(OBJ) $(HEADER)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT_FLAG)
@@ -50,10 +51,10 @@ gdb:
 
 clean:
 	rm -f $(OBJ)
-	$(MAKE) clean -C $(LIB_PATH)
+	$(MAKE_NO_PRINT) clean -C $(LIB_PATH)
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) fclean -C $(LIB_PATH)
+	$(MAKE_NO_PRINT) fclean -C $(LIB_PATH)
 
 .PHONY: all libft run leak gdb clean fclean
