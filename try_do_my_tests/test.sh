@@ -19,9 +19,10 @@ range=$((max - min + 1))
 
 # Variable to count successful sorts
 total_sorted=0
+total_operations=0
 
 printf "\n${BOLD}--------------------------------------------------${RESET}"
-printf "\n${BOLD}      PUSH SWAP TESTER: Sorting ${LINED_BLUE}$n${RESET} ${BOLD}numbers${RESET}"
+printf "\n${BOLD}      PUSH SWAP TESTER: Sorting ${LINED_BLUE}$nbrs${RESET} ${BOLD}numbers${RESET}"
 printf "\n${BOLD}--------------------------------------------------\n\n${RESET}"
 
 for ((i=1; i<=tests; i++))
@@ -38,27 +39,30 @@ do
     result=$(./push_swap $combination | ./checker_linux $combination)
     operations=$(./push_swap $combination | wc -l)
     printf "${BOLD}Test $i.${RESET}"
+    leak_result=$(valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes ./push_swap $combination 2>&1 | grep "All heap blocks were freed -- no leaks are possible")
 
-if [ $result == "OK" ]
-then
-    echo -e "${GREEN} [$result]${RESET} ($operations moves) "
-    total_sorted=$((total_sorted + 1))
-else
-    echo -e "${RED} [$result]${RESET} ($operations moves) "
-fi
+    if [ "$result" = "OK" ] && [ -n "$leak_result" ]
+    then
+        printf "${GREEN} [$result]${RESET} ($operations moves) "
+        printf "${GREEN} [No leaks detected]${RESET}\n"
+        total_sorted=$((total_sorted + 1))
+    else
+        printf "${RED} [$result]${RESET} ($operations moves) "
+        printf "${RED} [Leaks detected]${RESET}\n"
+    fi
 
-total_operations=$(($total_operations + $operations))
+    total_operations=$((total_operations + operations))
 
 done
 
 printf "\n${BOLD}----Results----\n"
-if [ $total_sorted == $tests ]
+if [ $total_sorted -eq $tests ]
 then
-    echo -e "OK: ${GREEN}[$total_sorted/$tests]${RESET}"
+    printf "OK: ${GREEN}[$total_sorted/$tests]${RESET}\n"
 else
-    echo -e "KO: ${RED}[$total_sorted/$tests]${RESET}"
+    printf "KO: ${RED}[$total_sorted/$tests]${RESET}\n"
 fi
 
-#Calculate the average number of operations
-average_operations=$(($total_operations / tests))
-echo "Avg moves:$average_operations"
+# Calculate the average number of operations
+average_operations=$((total_operations / tests))
+printf "Avg moves: $average_operations\n"
