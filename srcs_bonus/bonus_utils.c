@@ -1,24 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bonus_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcosta-m <gcosta-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 10:21:57 by gcosta-m          #+#    #+#             */
+/*   Updated: 2025/01/06 10:22:02 by gcosta-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap_bonus.h"
 
-void ft_handle_errors(t_stack *a, t_stack *b, int stage, char **n_matrix)
+void	ft_handle_errors(t_stack *a, t_stack *b, int stage, char **n_matrix)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (n_matrix != NULL)
-    {
-        while (n_matrix[i])
-            i++;
-        ft_free_matrix(n_matrix, i);
-    }
-    if (stage >= 1)
-    {
-        free(a->items);
-        if (stage >= 2)
-            free(b->items);
-    }
-    write(2, "Error\n", 6);
-    exit(EXIT_FAILURE);
+	i = 0;
+	if (n_matrix != NULL)
+	{
+		while (n_matrix[i])
+			i++;
+		ft_free_matrix(n_matrix, i);
+	}
+	if (stage >= 1)
+	{
+		free(a->items);
+		if (stage >= 2)
+			free(b->items);
+	}
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
 }
 
 int	check_if_sorted(t_stack *a)
@@ -77,22 +89,22 @@ void	exec_operation(char *operation, t_stack *a, t_stack *b)
 		ft_handle_errors(a, b, 3, NULL);
 }
 
-void exec_and_check_instructions(t_stack *a, t_stack *b)
+void	exec_and_check_instructions(t_stack *a, t_stack *b)
 {
-    char *operation;
+	char	*operation;
 
-    operation = get_next_line(0);
-    while (operation != NULL)
-    {
-        exec_operation(operation, a, b);
-        free(operation);
-        operation = get_next_line(0);
-    }
-    if (check_if_sorted(a) == 1 || b->top != 0)
-    {
-        free(a->items);
-        free(b->items);
-        ft_printf("KO\n");
-        exit(EXIT_FAILURE);
-    }
+	operation = get_next_line(0);
+	while (operation != NULL)
+	{
+		exec_operation(operation, a, b);
+		free(operation);
+		operation = get_next_line(0);
+	}
+	if (check_if_sorted(a) == 1 || b->top != 0)
+	{
+		free(a->items);
+		free(b->items);
+		ft_printf("KO\n");
+		exit(EXIT_FAILURE);
+	}
 }
