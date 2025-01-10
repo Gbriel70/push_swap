@@ -53,6 +53,8 @@ My implementation works as follows:
 
 I used it to visualize the execution of the program [visualizer](https://github.com/o-reo/push_swap_visualizer)
 
+![](https://github.com/Gbriel70/push_swap/blob/main/execution_video/gif_push_swap.gif)
+
 # How use
 
 ```sh
