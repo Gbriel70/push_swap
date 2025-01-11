@@ -108,6 +108,7 @@ OK: [10/10]
 Avg moves: 1475
 
 ```
+3. **Appendix: Checking for Memory Leaks Manually Don't trust 100% just any test**
 
 # Bonus Part
 
