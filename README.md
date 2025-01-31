@@ -1,3 +1,5 @@
+<div align="center"><h1>Push_swap [125 / 100]</h1></div>
+
 <div align="center">
   <a href="https://github.com/Gbriel70/push_swap" target="_blank"><img height=300 src="https://github.com/byaliego/42-project-badges/raw/main/badges/push_swapm.png"></a>
 </div>
