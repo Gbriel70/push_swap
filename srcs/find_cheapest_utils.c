@@ -35,27 +35,28 @@ int	find_target_position(t_stack *a, int num, t_stack *b)
 
 int	*sort_cpy_stack(t_stack *a)
 {
-	int	*stack_cpy;
-	int	i;
-	int	j;
+	int *stack_cpy;
+    int i;
+    int j;
 
-	stack_cpy = ft_calloc(a->top, sizeof(int));
-	if (stack_cpy == NULL)
-		return (NULL);
-	stack_cpy = ft_memcpy(stack_cpy, a->items, a->top * sizeof(int));
-	i = 0;
-	while (i < a->top - 1)
-	{
-		j = i + 1;
-		while (j < a->top)
-		{
-			if (stack_cpy[i] < stack_cpy[j])
-				ft_swap(&stack_cpy[i], &stack_cpy[j]);
-			j++;
-		}
-		i++;
-	}
-	return (stack_cpy);
+    stack_cpy = ft_calloc(a->top, sizeof(int));
+    if (stack_cpy == NULL)
+        return (NULL);
+    i = -1;
+    while (++i < a->top)
+        stack_cpy[i] = a->items[i];
+    i = -1;
+    while (++i < a->top - 1)
+    {
+        j = i + 1;
+        while (j < a->top)
+        {
+            if (stack_cpy[i] < stack_cpy[j])
+                ft_swap(&stack_cpy[i], &stack_cpy[j]);
+            j++;
+        }
+    }
+    return (stack_cpy);
 }
 
 int	cost_to_target(t_stack *a, t_stack *b, int num_position,

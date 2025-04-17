@@ -62,6 +62,11 @@ leak:
 tests:
 	@./try_do_my_tests/test.sh $(tests) $(nbrs)
 
+#================================SET LIB=================================#
+
+set:
+	git submodule update --init --recursive
+
 #================================GDB===========================================#
 
 gdb:
